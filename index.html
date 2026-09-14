@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="sw" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BYAO Master Studio Pro - All-in-One Ecosystem</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#030712',
+                        cardBg: '#0b0f19',
+                        accentRed: '#dc2626'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-darkBg text-slate-100 min-h-screen w-full flex flex-col font-sans overflow-x-hidden selection:bg-red-600 selection:text-white">
+
+    <header class="w-full bg-cardBg/95 backdrop-blur-md border-b border-slate-800/80 px-4 py-3 flex items-center justify-between sticky top-0 z-50 shadow-2xl">
+        <div class="flex items-center space-x-3">
+            <button onclick="toggleSidebar()" class="bg-slate-900 hover:bg-slate-800 text-red-500 p-2 rounded-xl border border-slate-800 transition shadow-sm flex items-center justify-center" title="Fungua/Funga Sidebar">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+            <span class="bg-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-lg uppercase tracking-wider shadow-md animate-pulse">BYAO PRO</span>
+            <div>
+                <h1 class="text-sm sm:text-base font-extrabold tracking-tight text-white flex items-center gap-1.5">
+                    <span>⚡</span> BYAO Master Studio Pro
+                </h1>
+                <p class="text-[10px] text-slate-400 hidden sm:block">All-in-One Offline Transfer, Converter & Developer Suite</p>
+            </div>
+        </div>
+        <div class="flex items-center space-x-2">
+            <div id="toastNotification" class="hidden bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-3 py-1 rounded-full text-[10px] font-bold tracking-wide shadow-sm transition-all">
+                Tayari
+            </div>
+            <a href="studio.html" class="bg-slate-900 hover:bg-slate-800 text-slate-200 font-bold px-3 py-1.5 rounded-xl text-xs transition border border-slate-700/60 shadow-md flex items-center gap-1">
+                <span>🏠</span> <span>Hub</span>
+            </a>
+        </div>
+    </header>
+
+    <div class="flex-1 flex relative overflow-hidden">
+        
+        <aside id="appSidebar" class="w-72 bg-cardBg border-r border-slate-800/80 flex flex-col transition-all duration-300 z-40 absolute lg:relative inset-y-0 left-0 -translate-x-full lg:translate-x-0 shadow-2xl">
+            <div class="p-4 border-b border-slate-800 flex items-center justify-between">
+                <span class="text-xs font-bold text-red-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <span>⚡</span> Moduli Kuu za Studio
+                </span>
+                <button onclick="toggleSidebar()" class="lg:hidden text-slate-400 hover:text-white">✕</button>
+            </div>
+
+            <div class="p-3 border-b border-slate-800/60 bg-slate-950/40 space-y-1.5 flex-1 overflow-y-auto">
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Vituo vya Kazi</p>
+                <button onclick="switchTab('transfer')" id="sidebar-tab-transfer" class="w-full text-left flex items-center justify-between text-xs px-3 py-2.5 rounded-xl bg-red-600/20 text-red-400 border border-red-500/30 font-bold transition">
+                    <span>📡 1. P2P Transfer Studio</span>
+                    <span>➔</span>
+                </button>
+                <button onclick="switchTab('converter')" id="sidebar-tab-converter" class="w-full text-left flex items-center justify-between text-xs px-3 py-2.5 rounded-xl bg-slate-900 hover:bg-red-600/20 text-slate-200 hover:text-red-400 border border-slate-800 transition">
+                    <span>⚡ 2. Ultimate Converter</span>
+                    <span>➔</span>
+                </button>
+                <button onclick="switchTab('compressor')" id="sidebar-tab-compressor" class="w-full text-left flex items-center justify-between text-xs px-3 py-2.5 rounded-xl bg-slate-900 hover:bg-red-600/20 text-slate-200 hover:text-red-400 border border-slate-800 transition">
+                    <span>🖼️ 3. Image & Icon Suite</span>
+                    <span>➔</span>
+                </button>
+                <button onclick="switchTab('generator')" id="sidebar-tab-generator" class="w-full text-left flex items-center justify-between text-xs px-3 py-2.5 rounded-xl bg-slate-900 hover:bg-red-600/20 text-slate-200 hover:text-red-400 border border-slate-800 transition">
+                    <span>📱 4. Multi-Icon Pack</span>
+                    <span>➔</span>
+                </button>
+                <button onclick="switchTab('base64')" id="sidebar-tab-base64" class="w-full text-left flex items-center justify-between text-xs px-3 py-2.5 rounded-xl bg-slate-900 hover:bg-red-600/20 text-slate-200 hover:text-red-400 border border-slate-800 transition">
+                    <span>📝 5. Base64 & PWA Tool</span>
+                    <span>➔</span>
+                </button>
+            </div>
+        </aside>
+
+        <main class="flex-1 w-full max-w-4xl mx-auto p-4 sm:p-6 flex flex-col space-y-6 overflow-y-auto">
+            
+            <div id="section-transfer" class="space-y-6">
+                
+                <div class="bg-gradient-to-r from-red-950/40 via-cardBg to-cardBg border border-red-500/30 p-4 rounded-2xl shadow-xl flex flex-col space-y-4">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-3 h-3 rounded-full bg-emerald-500 animate-ping flex-shrink-0"></div>
+                            <div>
+                                <h2 class="text-xs sm:text-sm font-bold text-white">Hali ya Mtandao wa Karibu (P2P Mesh)</h2>
+                                <p class="text-[10px] text-slate-400">Kifaa kiko tayari kuunganishwa na simu nyingine bila intaneti.</p>
+                            </div>
+                        </div>
+                        <button onclick="generateConnectionToken()" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-red-400 border border-slate-800 text-[10px] font-bold px-4 py-2.5 rounded-xl transition shadow-md">
+                            🔑 Tengeneza Token
+                        </button>
+                    </div>
+
+                    <div id="tokenContainer" class="hidden flex-col items-center justify-center text-center gap-3 p-5 bg-slate-900/90 border border-slate-800 rounded-2xl mt-2 w-full shadow-2xl">
+                        <span id="displayToken" class="text-sm font-mono font-extrabold text-red-400 bg-slate-950 border border-slate-800 px-4 py-1.5 rounded-xl tracking-wider shadow-inner">
+                            BYAO-P2P-2026
+                        </span>
+                        
+                        <div class="p-3 bg-white rounded-2xl shadow-xl flex items-center justify-center my-1 border-2 border-red-500/20">
+                            <div id="qrcode" class="flex justify-center items-center"></div>
+                        </div>
+                        
+                        <p class="text-[11px] text-slate-400 font-medium">Scan QR Code hii kwa kutumia simu nyingine kuunganisha</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+                            <span>📷</span> QR Code Camera Scanner
+                        </h3>
+                    </div>
+                    <div id="qr-reader" class="hidden overflow-hidden rounded-2xl border-2 border-emerald-500/50 bg-slate-950"></div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="startQrScanner('qr-reader')" class="bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white text-xs font-bold py-3 px-3 rounded-xl shadow-md transition-all flex items-center justify-center gap-1">
+                            <span>📷 Washa Kamera</span>
+                        </button>
+                        <button onclick="stopQrScanner()" class="bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-300 text-xs font-bold py-3 px-3 rounded-xl border border-slate-700 transition-all flex items-center justify-center gap-1">
+                            <span>🛑 Funga Kamera</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-cardBg border border-slate-800/80 p-4 sm:p-6 rounded-2xl shadow-xl space-y-4">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300">Chagua Aina ya Data ya Kuhamisha:</h3>
+                    
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-h-64 overflow-y-auto p-1 pr-2">
+                        <button onclick="triggerFilePicker('audio/*')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
+                            <span>🎵</span> <span class="text-xs font-medium text-slate-200">Muziki (Audio)</span>
+                        </button>
+                        <button onclick="triggerFilePicker('video/*')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
+                            <span>🎬</span> <span class="text-xs font-medium text-slate-200">Video</span>
+                        </button>
+                        <button onclick="triggerFilePicker('image/*')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
+                            <span>🖼️</span> <span class="text-xs font-medium text-slate-200">Picha (Images)</span>
+                        </button>
+                        <button onclick="triggerFilePicker('.vcf,.vcard')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
+                            <span>📇</span> <span class="text-xs font-medium text-slate-200">Contacts (.vcf)</span>
+                        </button>
+                        <button onclick="triggerFilePicker('.html,.htm')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
+                            <span>🌐</span> <span class="text-xs font-medium text-slate-200">Fichiers HTML</span>
+                        </button>
+                        <button onclick="triggerFilePicker('.pdf,.doc,.docx,.txt,.xls,.xlsx')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
+                            <span>📄</span> <span class="text-xs font-medium text-slate-200">Nyaraka (Docs)</span>
+                        </button>
+                        <button onclick="triggerFilePicker('.json,.sql,.db')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
+                            <span>🗄️</span> <span class="text-xs font-medium text-slate-200">Databases / JSON</span>
+                        </button>
+                        <button onclick="triggerFilePicker('.apk')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
+                            <span>📦</span> <span class="text-xs font-medium text-slate-200">Programu (APKs)</span>
+                        </button>
+                        <button onclick="triggerFilePicker('*/*')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
+                            <span>📁</span> <span class="text-xs font-medium text-slate-200">Mafaili Yote</span>
+                        </button>
+                    </div>
+
+                    <input type="file" id="dynamicFileInput" multiple class="hidden" onchange="handleSelectedFiles(event)">
+
+                    <div id="selectedFilesContainer" class="hidden bg-slate-950 border border-slate-800 rounded-xl p-3 space-y-2">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <span class="text-xs font-bold text-slate-300">Mafaili Yaliyochaguliwa:</span>
+                            <span id="fileCount" class="text-[10px] bg-red-600/20 text-red-400 font-bold px-2 py-0.5 rounded-full">0</span>
+                        </div>
+                        <ul id="selectedFilesList" class="max-h-36 overflow-y-auto space-y-1 text-xs text-slate-300 pr-1"></ul>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 pt-2">
+                        <button onclick="startTransferSession('send')" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3.5 px-3 rounded-xl transition text-xs uppercase tracking-wider shadow-lg flex items-center justify-center space-x-1.5">
+                            <span>📤 Tuma Kwenda Simu</span>
+                        </button>
+                        <button onclick="startTransferSession('receive')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 px-3 rounded-xl transition text-xs uppercase tracking-wider shadow-lg flex items-center justify-center space-x-1.5">
+                            <span>📥 Pokea Kutoka Simu</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-cardBg border border-slate-800/80 p-4 sm:p-5 rounded-2xl shadow-xl space-y-4">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">Mchakato wa P2P & Console Log:</span>
+                        <span id="transferPercentage" class="text-xs font-mono text-slate-400">0%</span>
+                    </div>
+                    <div class="w-full bg-slate-950 rounded-full h-2.5 border border-slate-900 overflow-hidden">
+                        <div id="transferBarFill" class="bg-red-600 h-2.5 w-0 transition-all duration-300"></div>
+                    </div>
+                    <div id="transferConsoleLog" class="bg-slate-950 p-4 rounded-xl border border-slate-900 overflow-y-auto text-xs text-emerald-300 font-mono h-36 whitespace-pre-wrap">> Mfumo wa ByaoP2PTransfer umesubiri maagizo ya kuhamisha data...</div>
+                </div>
+
+                <div id="fileTransferSection" class="bg-cardBg border border-slate-800/80 p-4 rounded-2xl space-y-3">
+                    <h3 class="text-xs font-bold text-slate-300 uppercase">Tuma Faili Direct (P2P)</h3>
+                    <input type="file" id="p2pFileInput" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2 text-xs text-slate-400" />
+                    <button onclick="sendFile('p2pFileInput')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-xs transition">Tuma Faili kwa Simu Nyingine</button>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-800 p-4 rounded-2xl space-y-3">
+                    <h3 class="text-xs font-bold text-slate-300 flex items-center gap-2">
+                        <span>📄</span> Geuza Picha kuwa PDF (Image to PDF)
+                    </h3>
+                    <label class="block cursor-pointer">
+                        <div class="border border-dashed border-slate-700 hover:border-red-500 rounded-xl p-4 text-center bg-slate-900/50 transition-all">
+                            <span class="text-xs font-bold text-slate-300 block">Chagua Picha Moja au Nyingi</span>
+                            <span class="text-[10px] text-slate-500">PNG, JPG, WEBP</span>
+                        </div>
+                        <input type="file" id="pdfImageInput" onchange="handlePdfImagesSelection(event)" multiple accept="image/*" class="hidden">
+                    </label>
+                    <div id="pdfFileInfoBox" class="hidden flex items-center justify-between text-xs text-emerald-400 font-bold bg-slate-900 p-2.5 rounded-lg border border-slate-800">
+                        <span id="pdfSelectedCount">Picha zilizochaguliwa: 0</span>
+                    </div>
+                    <button onclick="convertImagesToPDF()" class="w-full bg-red-600 hover:bg-red-500 active:scale-95 text-white font-bold py-3 px-4 rounded-xl shadow-md transition-all text-xs">
+                        📑 Tengeneza na Pakua PDF
+                    </button>
+                </div>
+
+            </div>
+
+            <div id="section-converter" class="space-y-6 hidden">
+                <div class="bg-cardBg border border-slate-800/80 p-4 sm:p-6 rounded-2xl shadow-xl space-y-5">
+                    <div class="border-2 border-dashed border-slate-700/80 hover:border-red-500/60 rounded-2xl p-6 text-center transition bg-slate-950/40 relative flex flex-col items-center justify-center space-y-2">
+                        <span class="text-3xl">📁</span>
+                        <h2 class="text-xs sm:text-sm font-bold text-slate-200">Weka au Chagua Faili Lako la Chanzo (25+ Formats)</h2>
+                        <p class="text-[10px] text-slate-500">Inaweza kuhimili picha, sauti, video, na nyaraka za kiwango cha juu.</p>
+                        <input type="file" id="converterFileInput" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="handleConverterFileSelection(event)">
+                    </div>
+
+                    <div id="converterFileInfoBox" class="hidden bg-slate-950 border border-slate-800 p-3 rounded-xl flex items-center justify-between text-xs">
+                        <span id="converterSelectedFileName" class="text-red-400 font-bold truncate">Faili: -</span>
+                        <span id="converterSelectedFileSize" class="text-slate-500 font-mono">0 KB</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-1.5">
+                            <label class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Toka (Source Format):</label>
+                            <select id="sourceFormat" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-red-500 transition">
+                                <optgroup label="Muziki / Audio">
+                                    <option value="mp3">MP3 Audio</option><option value="wav">WAV Audio</option><option value="aac">AAC Audio</option><option value="flac">FLAC Lossless</option><option value="ogg">OGG Vorbis</option>
+                                </optgroup>
+                                <optgroup label="Video">
+                                    <option value="mp4">MP4 Video</option><option value="mkv">MKV Video</option><option value="avi">AVI Video</option><option value="mov">MOV Video</option><option value="webm">WEBM Video</option>
+                                </optgroup>
+                                <optgroup label="Picha / Images">
+                                    <option value="jpg">JPG Image</option><option value="png">PNG Image</option><option value="webp">WEBP Image</option><option value="gif">GIF Image</option><option value="svg">SVG Vector</option>
+                                </optgroup>
+                                <optgroup label="Vitabu / E-Books">
+                                    <option value="pdf">PDF Document</option><option value="epub">EPUB E-Book</option><option value="mobi">MOBI Kindle</option><option value="txt">TXT Plain Text</option><option value="cbz">CBZ Comic Book</option>
+                                </optgroup>
+                                <optgroup label="Nyaraka na Mifumo Nyingine">
+                                    <option value="docx">DOCX Word</option><option value="xlsx">XLSX Excel</option><option value="json">JSON Data</option><option value="html">HTML Code</option><option value="zip">ZIP Archive</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Kwenda (Target Format):</label>
+                            <select id="targetFormat" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-red-400 font-bold focus:outline-none focus:border-red-500 transition">
+                                <optgroup label="Muziki / Audio">
+                                    <option value="mp3">MP3 Audio</option><option value="wav">WAV Audio</option><option value="aac">AAC Audio</option><option value="flac">FLAC Lossless</option><option value="ogg">OGG Vorbis</option>
+                                </optgroup>
+                                <optgroup label="Video">
+                                    <option value="mp4">MP4 Video</option><option value="mkv">MKV Video</option><option value="avi">AVI Video</option><option value="mov">MOV Video</option><option value="webm">WEBM Video</option>
+                                </optgroup>
+                                <optgroup label="Picha / Images">
+                                    <option value="jpg">JPG Image</option><option value="png">PNG Image</option><option value="webp">WEBP Image</option><option value="gif">GIF Image</option><option value="svg">SVG Vector</option>
+                                </optgroup>
+                                <optgroup label="Vitabu / E-Books">
+                                    <option value="pdf">PDF Document</option><option value="epub">EPUB E-Book</option><option value="mobi">MOBI Kindle</option><option value="txt">TXT Plain Text</option><option value="cbz">CBZ Comic Book</option>
+                                </optgroup>
+                                <optgroup label="Nyaraka na Mifumo Nyingine">
+                                    <option value="docx">DOCX Word</option><option value="xlsx">XLSX Excel</option><option value="json">JSON Data</option><option value="html">HTML Code</option><option value="zip">ZIP Archive</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button onclick="startConversionProcess()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3.5 px-4 rounded-xl transition text-xs uppercase tracking-wider shadow-lg flex items-center justify-center space-x-2">
+                        <span>🚀 Anzisha Ubadilishaji (Convert Now)</span>
+                    </button>
+                </div>
+
+                <div class="bg-cardBg border border-slate-800/80 p-4 sm:p-5 rounded-2xl shadow-xl space-y-4 pb-6">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">Mchakato wa Converter & Log:</span>
+                        <span id="converterProgressPercentage" class="text-xs font-mono text-slate-400">0%</span>
+                    </div>
+                    <div class="w-full bg-slate-950 rounded-full h-2.5 border border-slate-900 overflow-hidden">
+                        <div id="converterProgressBarFill" class="bg-red-600 h-2.5 w-0 transition-all duration-300"></div>
+                    </div>
+                    <div id="converterConsoleLog" class="bg-slate-950 p-4 rounded-xl border border-slate-900 overflow-y-auto text-xs text-emerald-300 font-mono h-36 whitespace-pre-wrap">> Subiri uanzishe mchakato wa kubadili faili...</div>
+                </div>
+            </div>
+
+            <div id="section-compressor" class="bg-cardBg border border-slate-800/80 p-5 rounded-2xl shadow-xl space-y-5 hidden">
+                <div class="border-2 border-slate-800 border-dashed rounded-2xl p-4 text-center bg-slate-950/50 hover:bg-slate-950 transition cursor-pointer relative">
+                    <input type="file" id="compInput" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer">
+                    <p class="text-sm font-medium text-slate-300"><span class="text-red-400 font-bold">Bonyeza kupakia</span> picha au ikoni</p>
+                    <p id="compFileName" class="text-xs text-slate-500 mt-1">PNG, JPG, WEBP zinaruhusiwa</p>
+                </div>
+
+                <div id="compControls" class="hidden space-y-4 bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                    <div class="grid grid-cols-3 gap-2">
+                        <button type="button" onclick="setFormat('image/jpeg', event)" id="fmt-jpeg" class="fmt-btn py-2 rounded-xl text-xs font-bold bg-red-600 text-white">JPG</button>
+                        <button type="button" onclick="setFormat('image/png', event)" id="fmt-png" class="fmt-btn py-2 rounded-xl text-xs font-bold bg-slate-900 text-slate-300">PNG</button>
+                        <button type="button" onclick="setFormat('image/webp', event)" id="fmt-webp" class="fmt-btn py-2 rounded-xl text-xs font-bold bg-slate-900 text-slate-300">WEBP</button>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="text-[10px] text-slate-400 uppercase font-bold">Upana (Width px)</label>
+                            <input type="number" id="compW" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-red-500">
+                        </div>
+                        <div>
+                            <label class="text-[10px] text-slate-400 uppercase font-bold">Urefu (Height px)</label>
+                            <input type="number" id="compH" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-red-500">
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-xs text-slate-400 mb-1">
+                            <span>Quality / Uzito</span>
+                            <span id="compQVal" class="text-red-400 font-bold">85%</span>
+                        </div>
+                        <input type="range" id="compQ" min="10" max="100" value="85" class="w-full accent-red-500 h-2 bg-slate-900 rounded-lg">
+                    </div>
+
+                    <button onclick="processCompression()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition shadow-lg text-sm">Chakata na Pakua Picha ⚡</button>
+                </div>
+
+                <div id="compResult" class="hidden bg-slate-950 p-4 rounded-2xl border border-emerald-500/30 text-center space-y-2">
+                    <p class="text-emerald-400 font-bold text-sm">Imefanikiwa! ✔️</p>
+                    <div class="text-xs text-slate-300">Zamani: <span id="resOld" class="text-white font-semibold">0</span> | Mpya: <span id="resNew" class="text-green-400 font-semibold">0</span></div>
+                    <a id="compDownload" class="block w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-sm transition shadow-lg">Pakua Faili 📥</a>
+                </div>
+            </div>
+
+            <div id="section-generator" class="bg-cardBg border border-slate-800/80 p-5 rounded-2xl shadow-xl space-y-5 hidden">
+                <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 text-center space-y-4">
+                    <p class="text-sm text-slate-300">Weka picha moja ya kuanzia (Master Icon), mfumo utazalisha saizi zote za App kwa mpigo.</p>
+                    <input type="file" id="multiInput" accept="image/*" class="block w-full text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-red-600 file:text-white cursor-pointer">
+                    <button onclick="generateMultiIcons()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition shadow-lg text-sm">Zalisha Ukubwa Wote (512, 192, 144, 96, 48) 🚀</button>
+                </div>
+                <div id="multiResults" class="hidden space-y-3 bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-400">Matokeo Yaliyotengenezwa:</h3>
+                    <div id="multiLinks" class="space-y-2"></div>
+                </div>
+            </div>
+
+            <div id="section-base64" class="bg-cardBg border border-slate-800/80 p-5 rounded-2xl shadow-xl space-y-4 hidden">
+                <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-3">
+                    <label class="text-xs font-bold uppercase text-slate-400">Geuza Picha iwe Base64 String</label>
+                    <input type="file" id="b64Input" accept="image/*" class="block w-full text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-red-600 file:text-white cursor-pointer">
+                    <textarea id="b64Output" readonly placeholder="Hapa patatokea maandishi ya Base64..." class="w-full h-28 bg-slate-900 border border-slate-800 rounded-xl p-3 text-xs text-slate-300 font-mono focus:outline-none"></textarea>
+                    <button onclick="copyBase64()" class="w-full bg-slate-900 hover:bg-slate-800 border border-slate-800 text-white font-bold py-2.5 rounded-xl text-sm transition">Nakili Base64 📋</button>
+                </div>
+
+                <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-3">
+                    <h3 class="text-xs font-bold uppercase text-slate-400">Zalisha PWA manifest.json</h3>
+                    <input type="text" id="mName" placeholder="Jina Kamili (Mf: BYAO Master Studio)" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none">
+                    <input type="text" id="mShortName" placeholder="Jina Fupi (Mf: BYAO)" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none">
+                    <textarea id="mOutput" readonly class="w-full h-28 bg-slate-900 border border-slate-800 rounded-xl p-3 text-xs text-slate-300 font-mono focus:outline-none"></textarea>
+                    <button onclick="generateManifest()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl text-sm transition shadow-lg">Zalisha manifest.json 📝</button>
+                </div>
+            </div>
+
+            <div id="ad-banner-container" class="w-full my-4 flex justify-center items-center min-h-[90px] bg-slate-900/50 rounded-2xl border border-slate-800">
+                <div id="online-ad-slot"></div>
+                
+                <div id="offline-ad-fallback" class="hidden p-3 text-center">
+                    <p class="text-xs font-bold text-red-400">⚡ BYAO Master Studio Pro</p>
+                    <p class="text-[10px] text-slate-400">Tumia zana zetu za P2P & Converter bure bila intaneti!</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+        
+    <script>
+        function showNotification(msg) {
+            let toast = document.getElementById('toastNotification');
+            if (toast) {
+                toast.innerText = msg;
+                toast.classList.remove('hidden');
+                setTimeout(() => { toast.classList.add('hidden'); }, 2500);
+            }
+        }
+
+        function logToConsole(message, type = 'info') {
+            const logBox = document.getElementById('transferConsoleLog') || document.getElementById('converterConsoleLog');
+            if (logBox) {
+                logBox.innerText += `\n${message}`;
+                logBox.scrollTop = logBox.scrollHeight;
+            }
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('appSidebar');
+            sidebar.classList.toggle('-translate-x-full');
+        }
+
+        function switchTab(tabId) {
+            const sections = ['transfer', 'converter', 'compressor', 'generator', 'base64'];
+            sections.forEach(id => {
+                const section = document.getElementById(`section-${id}`);
+                const tabBtn = document.getElementById(`sidebar-tab-${id}`);
+                if (id === tabId) {
+                    section.classList.remove('hidden');
+                    if (tabBtn) {
+                        tabBtn.classList.add('bg-red-600/20', 'text-red-400', 'border-red-500/30');
+                        tabBtn.classList.remove('bg-slate-900', 'text-slate-200', 'border-slate-800');
+                    }
+                } else {
+                    section.classList.add('hidden');
+                    if (tabBtn) {
+                        tabBtn.classList.remove('bg-red-600/20', 'text-red-400', 'border-red-500/30');
+                        tabBtn.classList.add('bg-slate-900', 'text-slate-200', 'border-slate-800');
+                    }
+                }
+            });
+            if (window.innerWidth < 1024) {
+                toggleSidebar();
+            }
+        }
+   
+        // =======================================================
+        // 1. WEBRTC & P2P TRANSFER ENGINE
+        // =======================================================
+        let localConnection = null;
+        let dataChannel = null;
+        let socket = null;
+        let currentToken = null;
+        let incomingFileInfo = null;
+        let receivedChunks = [];
+        let receivedSize = 0;
+        const CHUNK_SIZE = 16384; 
+        const SIGNALING_SERVER_URL = "wss://socketsbay.com/wss/v2/1/open/";
+
+        function initP2P() {
+            socket = new WebSocket(SIGNALING_SERVER_URL);
+
+            socket.onmessage = async (event) => {
+                const data = JSON.parse(event.data);
+                if (data.token !== currentToken) return;
+
+                if (data.type === 'offer') {
+                    await handleOffer(data.offer);
+                } else if (data.type === 'answer') {
+                    await handleAnswer(data.answer);
+                } else if (data.type === 'candidate') {
+                    if (localConnection) {
+                        await localConnection.addIceCandidate(data.candidate);
+                    }
+                }
+            };
+        }
+
+
+function generateConnectionToken() {
+    // 1. Zalisha Token
+    currentToken = 'BYAO-P2P-' + Math.floor(100000 + Math.random() * 900000);
+    
+    // 2. Onyesha Token kwenye UI
+    const tokenDisplay = document.getElementById('displayToken');
+    const tokenContainer = document.getElementById('tokenContainer');
+    const qrContainer = document.getElementById('qrcode');
+
+    if (tokenDisplay) tokenDisplay.innerText = currentToken;
+    if (tokenContainer) tokenContainer.classList.remove('hidden');
+
+    // 3. Tengeneza QR Code
+    if (qrContainer) {
+        qrContainer.innerHTML = ''; // Safisha QR ya zamani
+        new QRCode(qrContainer, {
+            text: currentToken,
+            width: 200,
+            height: 200,
+            colorDark: "#0f172a",  // Slate-900
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    }
+
+    logToConsole(`> Token mpya: ${currentToken}`, 'info');
+    showNotification(`Token: ${currentToken}`);
+
+    // 4. Anzisha Muunganisho wa P2P
+    if (!socket) initP2P();
+    setupPeerConnection(true);
+}
+
+async function connectToPeer(inputToken) {
+    currentToken = inputToken;
+    if (!socket) initP2P();
+
+    setupPeerConnection(false);
+
+    const offer = await localConnection.createOffer();
+    await localConnection.setLocalDescription(offer);
+
+    socket.send(JSON.stringify({
+        token: currentToken,
+        type: 'offer',
+        offer: offer
+    }));
+}
+
+        function setupPeerConnection(isHost) {
+            const config = {
+                iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+            };
+
+            localConnection = new RTCPeerConnection(config);
+
+            localConnection.onicecandidate = (event) => {
+                if (event.candidate) {
+                    socket.send(JSON.stringify({
+                        token: currentToken,
+                        type: 'candidate',
+                        candidate: event.candidate
+                    }));
+                }
+            };
+
+            if (isHost) {
+                localConnection.ondatachannel = (event) => {
+                    dataChannel = event.channel;
+                    setupDataChannelEvents();
+                };
+            } else {
+                dataChannel = localConnection.createDataChannel("fileTransferChannel");
+                setupDataChannelEvents();
+            }
+        }
+
+        async function handleOffer(offer) {
+            await localConnection.setRemoteDescription(new RTCSessionDescription(offer));
+            const answer = await localConnection.createAnswer();
+            await localConnection.setLocalDescription(answer);
+
+            socket.send(JSON.stringify({
+                token: currentToken,
+                type: 'answer',
+                answer: answer
+            }));
+        }
+
+        async function handleAnswer(answer) {
+            await localConnection.setRemoteDescription(new RTCSessionDescription(answer));
+        }
+
+        function setupDataChannelEvents() {
+            if (!dataChannel) return;
+            dataChannel.binaryType = 'arraybuffer';
+
+            dataChannel.onopen = () => {
+                logToConsole('> Muunganisho wa P2P Umetengenezwa Imara!', 'success');
+                showNotification("Simu zote mbili zimeunganishwa!");
+            };
+
+            dataChannel.onmessage = (event) => {
+                const data = event.data;
+
+                if (typeof data === 'string') {
+                    const message = JSON.parse(data);
+
+                    if (message.type === 'file-start') {
+                        incomingFileInfo = message;
+                        receivedChunks = [];
+                        receivedSize = 0;
+                        logToConsole(`> Inaanza kupokea faili: ${message.name}`, 'info');
+                    } 
+                    else if (message.type === 'file-end') {
+                        logToConsole(`> Faili imekamilika kupokelewa! Inatengeneza Download link...`, 'success');
+                        saveAndDownloadFile();
+                    }
+                } 
+                else if (data instanceof ArrayBuffer) {
+                    receivedChunks.push(data);
+                    receivedSize += data.byteLength;
+                    if (incomingFileInfo && incomingFileInfo.size) {
+                        let progress = Math.round((receivedSize / incomingFileInfo.size) * 100);
+                        logToConsole(`> Inapokea: ${progress}%`, 'info');
+                    }
+                }
+            };
+
+            dataChannel.onclose = () => {
+                logToConsole('> Muunganisho Umefungwa.', 'warn');
+            };
+        }
+
+        function sendFile(fileInputId) {
+            const fileInput = document.getElementById(fileInputId);
+            const file = fileInput ? fileInput.files[0] : null;
+
+            if (!file) {
+                alert("Tafadhali chagua faili kwanza!");
+                return;
+            }
+
+            if (!dataChannel || dataChannel.readyState !== 'open') {
+                alert("Simu hazijaunganishwa kupitia P2P!");
+                return;
+            }
+
+            logToConsole(`> Anza kutuma faili: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`, 'info');
+
+            const metaData = {
+                type: 'file-start',
+                name: file.name,
+                size: file.size,
+                mimeType: file.type
+            };
+            dataChannel.send(JSON.stringify(metaData));
+
+            const fileReader = new FileReader();
+            let offset = 0;
+
+            fileReader.onload = (e) => {
+                dataChannel.send(e.target.result);
+                offset += e.target.result.byteLength;
+
+                let progress = Math.round((offset / file.size) * 100);
+                logToConsole(`> Inatuma: ${progress}%`, 'info');
+
+                if (offset < file.size) {
+                    readNextChunk();
+                } else {
+                    dataChannel.send(JSON.stringify({ type: 'file-end' }));
+                    logToConsole(`> Faili imetumwa kikamilifu!`, 'success');
+                }
+            };
+
+            function readNextChunk() {
+                const slice = file.slice(offset, offset + CHUNK_SIZE);
+                fileReader.readAsArrayBuffer(slice);
+            }
+
+            readNextChunk();
+        }
+
+        function saveAndDownloadFile() {
+            if (!incomingFileInfo || receivedChunks.length === 0) return;
+
+            const blob = new Blob(receivedChunks, { type: incomingFileInfo.mimeType });
+            const downloadUrl = URL.createObjectURL(blob);
+
+            const cardContainer = document.createElement('div');
+            cardContainer.className = 'bg-slate-900 border border-emerald-500/30 p-3 rounded-xl mt-3 space-y-2';
+
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.href = downloadUrl;
+            downloadAnchor.download = incomingFileInfo.name;
+            downloadAnchor.className = 'block bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-4 rounded-xl text-center transition-all shadow-md active:scale-95 flex items-center justify-center gap-2 text-xs';
+            downloadAnchor.innerHTML = `<span>📥 Pakua Faili:</span> <span class="truncate max-w-[200px]">${incomingFileInfo.name}</span>`;
+
+            cardContainer.appendChild(downloadAnchor);
+
+            const qrContainer = document.createElement('div');
+            qrContainer.className = 'mt-2';
+
+            const toggleQrBtn = document.createElement('button');
+            toggleQrBtn.className = 'w-full text-xs font-semibold text-slate-300 bg-slate-700/60 hover:bg-slate-700 py-2 px-3 rounded-lg flex items-center justify-center gap-1 transition-all';
+            toggleQrBtn.innerHTML = `<span>🔍 Onyesha QR Code ya Kushiriki</span>`;
+
+            let isQrGenerated = false;
+            toggleQrBtn.addEventListener('click', () => {
+                if (!isQrGenerated) {
+                    generateDownloadQRCode(downloadUrl, qrContainer);
+                    toggleQrBtn.innerText = '❌ Ficha QR Code';
+                    isQrGenerated = true;
+                } else {
+                    qrContainer.innerHTML = '';
+                    toggleQrBtn.innerHTML = `<span>🔍 Onyesha QR Code ya Kushiriki</span>`;
+                    isQrGenerated = false;
+                }
+            });
+
+            cardContainer.appendChild(toggleQrBtn);
+            cardContainer.appendChild(qrContainer);
+
+            downloadAnchor.addEventListener('click', () => {
+                setTimeout(() => { URL.revokeObjectURL(downloadUrl); }, 15000);
+            });
+
+            const logBox = document.getElementById('transferConsoleLog');
+            if (logBox) {
+                logBox.appendChild(cardContainer);
+                logBox.scrollTop = logBox.scrollHeight;
+            }
+
+            showNotification(`Faili ${incomingFileInfo.name} ipo tayari!`);
+            logToConsole(`> Faili la ${incomingFileInfo.name} limekamilika na kuwekwa tayari.`, 'success');
+        }
+
+      let selectedFilesArray = [];
+
+// 1. Fungua Kisoma Mafaili kulingana na Aina iliyochaguliwa
+function triggerFilePicker(acceptType) {
+    const fileInput = document.getElementById('dynamicFileInput');
+    if (fileInput) {
+        fileInput.accept = acceptType;
+        fileInput.click();
+    }
+}
+
+// 2. Mapokezi ya Mafaili baada ya Mtumiaji Kuyachagua
+function handleSelectedFiles(event) {
+    const files = Array.from(event.target.files);
+    if (files.length === 0) return;
+
+    // Ongeza mafaili kwenye array
+    selectedFilesArray = [...selectedFilesArray, ...files];
+
+    renderSelectedFilesList();
+}
+
+// 3. Onyesha Orodha ya Mafaili Yaliyochaguliwa Kwenye UI
+function renderSelectedFilesList() {
+    const container = document.getElementById('selectedFilesContainer');
+    const list = document.getElementById('selectedFilesList');
+    const countBadge = document.getElementById('fileCount');
+
+    if (!container || !list) return;
+
+    if (selectedFilesArray.length > 0) {
+        container.classList.remove('hidden');
+        countBadge.innerText = `${selectedFilesArray.length} faili`;
+
+        list.innerHTML = selectedFilesArray.map((file, index) => `
+            <li class="flex items-center justify-between bg-slate-900 px-2.5 py-1.5 rounded-lg border border-slate-800">
+                <span class="truncate max-w-[200px] text-[11px]">${file.name}</span>
+                <div class="flex items-center gap-2">
+                    <span class="text-[9px] text-slate-400">${(file.size / (1024 * 1024)).toFixed(2)} MB</span>
+                    <button onclick="removeFileFromQueue(${index})" class="text-red-400 hover:text-red-300 font-bold text-xs">✕</button>
+                </div>
+            </li>
+        `).join('');
+    } else {
+        container.classList.add('hidden');
+    }
+}
+
+// 4. Ondoa Faili Moja Wapo Kwenye Orodha
+function removeFileFromQueue(index) {
+    selectedFilesArray.splice(index, 1);
+    renderSelectedFilesList();
+}
+
+// 5. Anzisha Uhamishaji wa Mafaili Yote
+async function startTransferSession(mode) {
+    if (mode === 'send') {
+        if (selectedFilesArray.length === 0) {
+            showNotification('Tafadhali chagua angalau faili moja kabla ya kutuma!');
+            return;
+        }
+
+        if (!dataChannel || dataChannel.readyState !== 'open') {
+            showNotification('Simu hazijaunganishwa kupitia P2P!');
+            return;
+        }
+
+        logToConsole(`> Kuanzisha Kutuma mafaili ${selectedFilesArray.length}...`, 'info');
+
+        // Tuma mafaili mtawalia (Sequential sending)
+        for (let i = 0; i < selectedFilesArray.length; i++) {
+            await sendSingleFile(selectedFilesArray[i], i + 1, selectedFilesArray.length);
+        }
+
+        selectedFilesArray = [];
+        renderSelectedFilesList();
+        showNotification('Mafaili yote yametumwa kwa mafanikio!');
+    } else {
+        logToConsole(`> Inasubiri kupokea mafaili kutoka kwa mtumaji...`, 'info');
+        showNotification('Mwelekeo wa kupokea umewashwa');
+    }
+}
+
+// 6. Tuma Faili Moja Moja Kupitia WebRTC DataChannel
+function sendSingleFile(file, currentIndex, totalFiles) {
+    return new Promise((resolve, reject) => {
+        logToConsole(`> [${currentIndex}/${totalFiles}] Anza kutuma: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`, 'info');
+
+        const metaData = {
+            type: 'file-start',
+            name: file.name,
+            size: file.size,
+            mimeType: file.type
+        };
+        dataChannel.send(JSON.stringify(metaData));
+
+        const fileReader = new FileReader();
+        let offset = 0;
+
+        fileReader.onload = (e) => {
+            dataChannel.send(e.target.result);
+            offset += e.target.result.byteLength;
+
+            let progress = Math.round((offset / file.size) * 100);
+            
+            let bar = document.getElementById('transferBarFill');
+            let percentageText = document.getElementById('transferPercentage');
+            if (bar) bar.style.width = progress + '%';
+            if (percentageText) percentageText.innerText = `${progress}% (${currentIndex}/${totalFiles})`;
+
+            if (offset < file.size) {
+                readNextChunk();
+            } else {
+                dataChannel.send(JSON.stringify({ type: 'file-end' }));
+                logToConsole(`> [${currentIndex}/${totalFiles}] Imetumwa kikamilifu: ${file.name}`, 'success');
+                resolve();
+            }
+        };
+
+        function readNextChunk() {
+            const slice = file.slice(offset, offset + CHUNK_SIZE);
+            fileReader.readAsArrayBuffer(slice);
+        }
+
+        readNextChunk();
+    });
+}
+      // =======================================================
+        // 2. CONVERTER MODULE
+        // =======================================================
+        let loadedConverterFile = null;
+        function handleConverterFileSelection(event) {
+            let file = event.target.files[0];
+            if (file) {
+                loadedConverterFile = file;
+                document.getElementById('converterFileInfoBox').classList.remove('hidden');
+                document.getElementById('converterSelectedFileName').innerText = `Faili: ${file.name}`;
+                document.getElementById('converterSelectedFileSize').innerText = `${(file.size / 1024).toFixed(1)} KB`;
+                showNotification('Faili limekubaliwa!');
+            }
+        }
+
+        function startConversionProcess() {
+            let src = document.getElementById('sourceFormat').value;
+            let target = document.getElementById('targetFormat').value;
+            
+            if (src === target) {
+                showNotification('Format zisiwe zinafanana!');
+                return;
+            }
+
+            logToConsole(`> Inabadilisha .${src.toUpperCase()} kwenda .${target.toUpperCase()}...`, 'info');
+            let progress = 0, bar = document.getElementById('converterProgressBarFill'), percentageText = document.getElementById('converterProgressPercentage');
+            
+            let interval = setInterval(() => {
+                progress += 25;
+                if (bar) bar.style.width = progress + '%';
+                if (percentageText) percentageText.innerText = progress + '%';
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    logToConsole(`> Mafanikio: Faili limebadilishwa kikamilifu!`, 'success');
+                    showNotification('Ubadilishaji umekamilika!');
+                }
+            }, 300);
+        }
+
+        // =======================================================
+        // 3. IMAGE COMPRESSOR & RESIZER
+        // =======================================================
+        let compFile = null, compImg = new Image(), selFormat = 'image/jpeg';
+        
+        function setFormat(fmt, evt) {
+            selFormat = fmt;
+            document.querySelectorAll('.fmt-btn').forEach(b => {
+                b.classList.remove('bg-red-600', 'text-white');
+                b.classList.add('bg-slate-900', 'text-slate-300');
+            });
+            if (evt && evt.target) {
+                evt.target.classList.remove('bg-slate-900', 'text-slate-300');
+                evt.target.classList.add('bg-red-600', 'text-white');
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const compQ = document.getElementById('compQ');
+            if (compQ) {
+                compQ.addEventListener('input', e => {
+                    document.getElementById('compQVal').innerText = e.target.value + '%';
+                });
+            }
+
+            const compInput = document.getElementById('compInput');
+            if (compInput) {
+                compInput.addEventListener('change', e => {
+                    compFile = e.target.files[0];
+                    if (!compFile) return;
+                    document.getElementById('compFileName').innerText = compFile.name;
+                    let reader = new FileReader();
+                    reader.readAsDataURL(compFile);
+                    reader.onload = ev => {
+                        compImg.src = ev.target.result;
+                        compImg.onload = () => {
+                            document.getElementById('compW').value = compImg.width;
+                            document.getElementById('compH').value = compImg.height;
+                            document.getElementById('compControls').classList.remove('hidden');
+                        }
+                    }
+                });
+            }
+
+            const multiInput = document.getElementById('multiInput');
+            if (multiInput) {
+                multiInput.addEventListener('change', e => {
+                    let file = e.target.files[0];
+                    if (!file) return;
+                    let reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = ev => {
+                        let img = new Image();
+                        img.src = ev.target.result;
+                        img.onload = () => { window.multiImg = img; showNotification("Master Icon imepokelewa!"); }
+                    }
+                });
+            }
+
+            const b64Input = document.getElementById('b64Input');
+            if (b64Input) {
+                b64Input.addEventListener('change', e => {
+                    let file = e.target.files[0];
+                    if (!file) return;
+                    let reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = ev => { 
+                        document.getElementById('b64Output').value = ev.target.result; 
+                        showNotification("Imetengenezwa Base64!"); 
+                    }
+                });
+            }
+        });
+
+        function processCompression() {
+            if (!compFile) return;
+            let w = parseInt(document.getElementById('compW').value) || compImg.width;
+            let h = parseInt(document.getElementById('compH').value) || compImg.height;
+            let canvas = document.createElement('canvas');
+            canvas.width = w; canvas.height = h;
+            let ctx = canvas.getContext('2d');
+            ctx.drawImage(compImg, 0, 0, w, h);
+            let q = parseInt(document.getElementById('compQ').value) / 100;
+            let dataUrl = canvas.toDataURL(selFormat, q);
+
+            document.getElementById('resOld').innerText = (compFile.size/1024).toFixed(1) + ' KB';
+            document.getElementById('resNew').innerText = (dataUrl.length * 0.75 / 1024).toFixed(1) + ' KB';
+            let dl = document.getElementById('compDownload');
+            dl.href = dataUrl;
+            dl.download = `byao-optimized.${selFormat.split('/')[1]}`;
+            document.getElementById('compResult').classList.remove('hidden');
+            showNotification("Picha imechakatwa!");
+        }
+
+        // =======================================================
+        // 4. MULTI-ICON PACK GENERATOR
+        // =======================================================
+        function generateMultiIcons() {
+            if (!window.multiImg) { alert('Chagua picha kwanza!'); return; }
+            let sizes = [512, 192, 144, 96, 48], container = document.getElementById('multiLinks');
+            container.innerHTML = '';
+            sizes.forEach(sz => {
+                let canvas = document.createElement('canvas');
+                canvas.width = sz; canvas.height = sz;
+                canvas.getContext('2d').drawImage(window.multiImg, 0, 0, sz, sz);
+                let url = canvas.toDataURL('image/png');
+                let div = document.createElement('div');
+                div.className = 'flex justify-between items-center bg-slate-900 p-2.5 rounded-xl text-xs';
+                div.innerHTML = `<span>Icon ${sz}x${sz} px</span> <a href="${url}" download="icon-${sz}.png" class="bg-red-600 text-white font-bold px-3 py-1.5 rounded-lg">Pakua</a>`;
+                container.appendChild(div);
+            });
+            document.getElementById('multiResults').classList.remove('hidden');
+            showNotification("Ikoni zote zimetengenezwa!");
+        }
+
+        // =======================================================
+        // 5. BASE64 & MANIFEST GENERATOR
+        // =======================================================
+        function copyBase64() {
+            let txt = document.getElementById('b64Output');
+            txt.select();
+            navigator.clipboard.writeText(txt.value);
+            showNotification('Imenakiliwa!');
+        }
+
+        function generateManifest() {
+            let name = document.getElementById('mName').value || 'BYAO Master Studio';
+            let shortName = document.getElementById('mShortName').value || 'BYAO';
+            let manifestData = {
+                "name": name, "short_name": shortName, "start_url": "/", "display": "standalone",
+                "background_color": "#030712", "theme_color": "#dc2626",
+                "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }, { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }]
+            };
+            document.getElementById('mOutput').value = JSON.stringify(manifestData, null, 2);
+            showNotification("manifest.json imetengenezwa!");
+        }
+
+        // =======================================================
+        // 6. QR CODE GENERATOR & SCANNER MODULES
+        // =======================================================
+        function generateDownloadQRCode(textUrl, targetElement) {
+            if (!targetElement) return;
+            targetElement.innerHTML = '';
+
+            const qrWrapper = document.createElement('div');
+            qrWrapper.className = 'flex flex-col items-center justify-center p-3 bg-white rounded-xl shadow-md border border-slate-200 my-2';
+
+            const qrCanvasContainer = document.createElement('div');
+            qrCanvasContainer.id = 'qrCanvasBox';
+            qrWrapper.appendChild(qrCanvasContainer);
+
+            const qrLabel = document.createElement('p');
+            qrLabel.className = 'text-xs text-slate-800 font-bold mt-2 text-center';
+            qrLabel.innerText = '📱 Scan hapa kupakua au kushiriki faili';
+            qrWrapper.appendChild(qrLabel);
+
+            targetElement.appendChild(qrWrapper);
+
+            if (typeof QRCode !== 'undefined') {
+                new QRCode(qrCanvasContainer, {
+                    text: textUrl,
+                    width: 160,
+                    height: 160,
+                    colorDark: "#0f172a",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+                logToConsole('> QR Code imetengenezwa kikamilifu!', 'success');
+            } else {
+                qrCanvasContainer.innerHTML = `<p class="text-xs text-red-500 font-mono p-2">! Library ya QRCode.js haikupatikana.</p>`;
+                logToConsole('! Kosa: Library ya QRCode.js haijapakiwa kwenye HTML.', 'warn');
+            }
+        }
+
+        let html5QrCodeScanner = null;
+
+        function startQrScanner(readerElementId = 'qr-reader', onScanSuccessCallback = null) {
+            const readerElem = document.getElementById(readerElementId);
+            if (!readerElem) {
+                logToConsole(`! Kosa: Element yenye ID '${readerElementId}' haikupatikana kwenye HTML.`, 'error');
+                return;
+            }
+
+            if (typeof Html5Qrcode === 'undefined') {
+                logToConsole('! Kosa: Library ya Html5Qrcode haijapakiwa kwenye HTML.', 'error');
+                showNotification('Library ya QR Scanner haipatikani!');
+                return;
+            }
+
+            stopQrScanner().then(() => {
+                readerElem.classList.remove('hidden');
+                html5QrCodeScanner = new Html5Qrcode(readerElementId);
+
+                const config = { fps: 10, qrbox: { width: 220, height: 220 }, aspectRatio: 1.0 };
+                logToConsole('> Inafungua kamera kwa ajili ya ku-scan QR Code...', 'info');
+
+                html5QrCodeScanner.start(
+                    { facingMode: "environment" },
+                    config,
+                    (decodedText, decodedResult) => {
+                        logToConsole(`> QR Code imepatikana: ${decodedText}`, 'success');
+                        showNotification('QR Code imesomwa kikamilifu!');
+                        
+                        if (navigator.vibrate) navigator.vibrate(200);
+                        stopQrScanner();
+
+                        if (typeof onScanSuccessCallback === 'function') {
+                            onScanSuccessCallback(decodedText, decodedResult);
+                        } else {
+                            handleScannedQrData(decodedText);
+                        }
+                    },
+                    (errorMessage) => {}
+                ).catch((err) => {
+                    logToConsole(`! Kosa la Kufungua Kamera: ${err}`, 'error');
+                    showNotification('Imeshindwa kufungua kamera!');
+                });
+            });
+        }
+
+        function stopQrScanner() {
+            return new Promise((resolve) => {
+                if (html5QrCodeScanner && html5QrCodeScanner.isScanning) {
+                    html5QrCodeScanner.stop().then(() => {
+                        html5QrCodeScanner.clear();
+                        html5QrCodeScanner = null;
+                        logToConsole('> QR Scanner imefungwa.', 'info');
+                        resolve();
+                    }).catch((err) => {
+                        console.error("Error stopping QR Scanner:", err);
+                        resolve();
+                    });
+                } else {
+                    resolve();
+                }
+            });
+        }
+
+        function handleScannedQrData(scannedData) {
+            const logBox = document.getElementById('transferConsoleLog') || document.getElementById('converterConsoleLog');
+            
+            const resultCard = document.createElement('div');
+            resultCard.className = 'bg-slate-800 border border-emerald-500/50 p-4 rounded-2xl mt-3 shadow-lg space-y-2';
+            
+            let contentHtml = `<p class="text-xs font-bold text-emerald-400">🔍 Matokeo ya QR Code:</p>`;
+            contentHtml += `<p class="text-xs font-mono text-white break-all bg-slate-950 p-2 rounded-xl border border-slate-700">${scannedData}</p>`;
+
+            if (scannedData.startsWith('http://') || scannedData.startsWith('https://') || scannedData.startsWith('blob:')) {
+                contentHtml += `
+                    <a href="${scannedData}" target="_blank" download class="block w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-3 rounded-xl text-center text-xs transition-all active:scale-95 mt-2">
+                        🚀 Fungua / Pakua Content
+                    </a>
+                `;
+            }
+
+            resultCard.innerHTML = contentHtml;
+
+            if (logBox) {
+                logBox.appendChild(resultCard);
+                logBox.scrollTop = logBox.scrollHeight;
+            }
+        }
+
+        // =======================================================
+        // 7. IMAGE-TO-PDF CONVERTER MODULE
+        // =======================================================
+        let selectedPdfImages = [];
+
+        function handlePdfImagesSelection(event) {
+            const files = Array.from(event.target.files || []);
+            if (files.length === 0) return;
+
+            const imageFiles = files.filter(f => f.type.startsWith('image/'));
+
+            if (imageFiles.length === 0) {
+                showNotification('Tafadhali chagua mafaili ya picha pekee!');
+                return;
+            }
+
+            selectedPdfImages = imageFiles;
+
+            const infoBox = document.getElementById('pdfFileInfoBox');
+            const pdfCountElem = document.getElementById('pdfSelectedCount');
+
+            if (infoBox) infoBox.classList.remove('hidden');
+            if (pdfCountElem) {
+                pdfCountElem.innerText = `Picha zilizochaguliwa: ${selectedPdfImages.length}`;
+            }
+
+            showNotification(`${selectedPdfImages.length} Picha zimepakiwa kwa PDF!`);
+            logToConsole(`> Picha ${selectedPdfImages.length} zimechaguliwa kwa ajili ya kugeuzwa kuwa PDF.`, 'info');
+        }
+
+        async function convertImagesToPDF() {
+            if (!selectedPdfImages || selectedPdfImages.length === 0) {
+                showNotification('Tafadhali chagua angalau picha moja!');
+                logToConsole('! Hakuna picha zilizochaguliwa kwa ajili ya PDF.', 'warn');
+                return;
+            }
+
+            const { jsPDF } = window.jspdf || {};
+            if (!jsPDF) {
+                logToConsole('! Kosa: Library ya jsPDF.js haikupatikana kwenye HTML.', 'error');
+                showNotification('Library ya jsPDF haijapakiwa!');
+                return;
+            }
+
+            logToConsole(`> Inasindika picha ${selectedPdfImages.length} kuwa PDF...`, 'info');
+
+            try {
+                let pdf = null;
+
+                for (let i = 0; i < selectedPdfImages.length; i++) {
+                    const file = selectedPdfImages[i];
+                    const imgData = await readImageAsDataURL(file);
+                    const dimensions = await getImageDimensions(imgData);
+
+                    const orientation = dimensions.width > dimensions.height ? 'l' : 'p';
+
+                    if (i === 0) {
+                        pdf = new jsPDF({
+                            orientation: orientation,
+                            unit: 'px',
+                            format: [dimensions.width, dimensions.height]
+                        });
+                        pdf.addImage(imgData, 'JPEG', 0, 0, dimensions.width, dimensions.height);
+                    } else {
+                        pdf.addPage([dimensions.width, dimensions.height], orientation);
+                        pdf.addImage(imgData, 'JPEG', 0, 0, dimensions.width, dimensions.height);
+                    }
+                }
+
+                const pdfBlob = pdf.output('blob');
+                const pdfFileName = `BYAO_Document_${Date.now()}.pdf`;
+                const downloadUrl = URL.createObjectURL(pdfBlob);
+
+                const downloadAnchor = document.createElement('a');
+                downloadAnchor.href = downloadUrl;
+                downloadAnchor.download = pdfFileName;
+                downloadAnchor.className = 'block bg-red-600 hover:bg-red-500 text-white font-bold py-3 px-4 rounded-xl text-center mt-3 shadow-md transition-all active:scale-95 text-xs';
+                downloadAnchor.innerText = `📄 Pakua Faili la PDF (${(pdfBlob.size / 1024).toFixed(1)} KB)`;
+
+                downloadAnchor.addEventListener('click', () => {
+                    setTimeout(() => URL.revokeObjectURL(downloadUrl), 10000);
+                });
+
+                const logBox = document.getElementById('converterConsoleLog') || document.getElementById('transferConsoleLog');
+                if (logBox) {
+                    logBox.appendChild(downloadAnchor);
+                    logBox.scrollTop = logBox.scrollHeight;
+                }
+
+                showNotification('PDF imetengenezwa kikamilifu!');
+                logToConsole(`> Mafanikio: Faili la PDF (${pdfFileName}) lipo tayari kupakuliwa.`, 'success');
+
+            } catch (error) {
+                logToConsole(`! Hitilafu wakati wa kutengeneza PDF: ${error.message}`, 'error');
+                showNotification('Imeshindwa kutengeneza PDF!');
+            } finally {
+                selectedPdfImages = [];
+            }
+        }
+
+        function readImageAsDataURL(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = e => resolve(e.target.result);
+                reader.onerror = err => reject(err);
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function getImageDimensions(dataUrl) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => resolve({ width: img.width, height: img.height });
+                img.src = dataUrl;
+            });
+        }
+        function manageAds() {
+    const onlineAd = document.getElementById('online-ad-slot');
+    const offlineFallback = document.getElementById('offline-ad-fallback');
+
+    if (navigator.onLine) {
+        // Mtumiaji yuko Online: Pakia SDK ya Matangazo (Mfano: AdSense au AdMob)
+        offlineFallback.classList.add('hidden');
+        onlineAd.classList.remove('hidden');
+        loadOnlineAdScript(); 
+    } else {
+        // Mtumiaji yuko Offline: Onyesha Banner ya ndani / Promosheni ya BYAO
+        onlineAd.classList.add('hidden');
+        offlineFallback.classList.remove('hidden');
+    }
+}
+
+// Sikiliza mabadiliko ya mtandao
+window.addEventListener('online', manageAds);
+window.addEventListener('offline', manageAds);
+window.addEventListener('DOMContentLoaded', manageAds);
+// Register Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => console.log('Service Worker Imesajiliwa kikamilifu:', reg.scope))
+      .catch(err => console.error('Uboreshaji wa Service Worker Umefeli:', err));
+  });
+}
+
+// Mfumo wa Kutambua Online / Offline Status
+function updateOnlineStatus() {
+  const adSlot = document.getElementById('online-ad-slot');
+  const adFallback = document.getElementById('offline-ad-fallback');
+  
+  if (navigator.onLine) {
+    showNotification("📶 Upo Mtandaoni (Online Mode)");
+    if (adSlot) adSlot.classList.remove('hidden');
+    if (adFallback) adFallback.classList.add('hidden');
+  } else {
+    showNotification("⚡ Mfumo Unafanya Kazi Offline (Offline Mode)");
+    if (adSlot) adSlot.classList.add('hidden');
+    if (adFallback) adFallback.classList.remove('hidden');
+  }
+}
+
+window.addEventListener('online', updateOnlineStatus);
+window.addEventListener('offline', updateOnlineStatus);
+window.addEventListener('DOMContentLoaded', updateOnlineStatus);
+
+    </script>
+</body>
+  </html>
