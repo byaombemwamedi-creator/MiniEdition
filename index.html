@@ -23,7 +23,51 @@
                 }
             }
         }
-    </script>
+        </script>
+<!-- 2. Styles CSS et Animations (dans une balise style dédiée) -->
+    <style>
+        @keyframes wave-pulse {
+            0% {
+                transform: scale(0.95);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.15);
+                opacity: 0.3;
+            }
+            100% {
+                transform: scale(0.95);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(0px) translateX(0px);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-80px) translateX(20px);
+                opacity: 0;
+            }
+        }
+
+        .animate-wave-slow {
+            animation: wave-pulse 3s infinite ease-in-out;
+        }
+
+        .animate-particle-1 {
+            animation: float-particle 4s infinite ease-in;
+        }
+
+        .animate-particle-2 {
+            animation: float-particle 3.5s infinite ease-in 1.5s;
+        }
+    </style>
+    
 </head>
 <body class="bg-darkBg text-slate-100 min-h-screen w-full flex flex-col font-sans overflow-x-hidden selection:bg-red-600 selection:text-white">
 
@@ -49,6 +93,54 @@
             </a>
         </div>
     </header>
+⇝ <!-- ÉCRAN DE PRÉ-CONNEXION / ATTENTE -->
+<div id="preConnectionScreen" class="fixed inset-0 bg-slate-950 z-50 flex flex-col items-center justify-between p-6 overflow-hidden">
+    
+    <!-- Espace supérieur vide ou titre discret -->
+    <div class="pt-8 text-center">
+        <p class="text-xs uppercase tracking-widest text-slate-500 font-semibold">BYAO P2P Ecosystem</p>
+    </div>
+
+<!-- ZONE CENTRALE AVEC VAGUES ET PARTICULES -->
+<div class="relative flex items-center justify-center my-auto w-72 h-72">
+    
+    <!-- Vague concentrique 1 (Effet radar/sonar) -->
+    <div class="absolute inset-0 rounded-full border border-red-500/30 animate-wave-slow"></div>
+    
+    <!-- Vague concentrique 2 (Décalée) -->
+    <div class="absolute inset-[-20px] rounded-full border border-red-500/10 animate-wave-slow" style="animation-delay: 1s;"></div>
+
+    <!-- Cercle central du spinner -->
+    <div class="w-32 h-32 rounded-full border-4 border-red-500 border-t-transparent animate-spin flex items-center justify-center shadow-lg shadow-red-500/20"></div>
+    
+    <!-- Icône centrale -->
+    <div class="absolute text-2xl">
+        <span>📡</span>
+    </div>
+
+    <!-- Particules flottantes simulées (Effet de données en transit) -->
+    <span class="absolute bottom-10 left-12 w-1.5 h-1.5 bg-red-400 rounded-full animate-particle-1 shadow-sm shadow-red-500"></span>
+    <span class="absolute bottom-12 right-14 w-2 h-2 bg-slate-200 rounded-full animate-particle-2"></span>
+    <span class="absolute bottom-8 right-20 w-1 h-1 bg-red-500 rounded-full animate-particle-1" style="animation-delay: 0.8s;"></span>
+</div>
+
+    <!-- ZONE INFÉRIEURE : Animation de fichiers entre téléphones -->
+    <div class="w-full max-w-xs bg-slate-900/80 border border-slate-800 p-4 rounded-2xl text-center space-y-3 backdrop-blur-md">
+        <!-- Illustration animée : Téléphone A -> Fichier en vol -> Téléphone B -->
+        <div class="flex items-center justify-between px-4">
+            <span class="text-2xl animate-pulse">📱</span>
+            <div class="flex-1 mx-3 flex items-center justify-center relative overflow-hidden h-2 bg-slate-950 rounded-full">
+                <!-- Point/Fichier en mouvement -->
+                <div class="absolute w-3 h-3 bg-red-500 rounded-full animate-bounce shadow-lg shadow-red-500/50"></div>
+            </div>
+            <span class="text-2xl animate-pulse">📲</span>
+        </div>
+        
+        <p id="connectionStatusText" class="text-xs font-medium text-slate-300">
+            Inatafuta vifaa karibu... (Recherche de l'autre appareil)
+        </p>
+    </div>
+</div>
 
     <div class="flex-1 flex relative overflow-hidden">
         
@@ -1300,6 +1392,18 @@ function updateOnlineStatus() {
 window.addEventListener('online', updateOnlineStatus);
 window.addEventListener('offline', updateOnlineStatus);
 window.addEventListener('DOMContentLoaded', updateOnlineStatus);
+
+function onP2PConnected() {
+    const preScreen = document.getElementById('preConnectionScreen');
+    if (preScreen) {
+        // Animation de fondu de sortie
+        preScreen.style.transition = 'opacity 0.5s ease';
+        preScreen.style.opacity = '0';
+        setTimeout(() => {
+            preScreen.classList.add('hidden');
+        }, 500);
+    }
+}
 
     </script>
 </body>
