@@ -133,38 +133,43 @@
                     </div>
                 </div>
 
-                <div class="bg-cardBg border border-slate-800/80 p-4 sm:p-6 rounded-2xl shadow-xl space-y-4">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300">Chagua Aina ya Data ya Kuhamisha:</h3>
-                    
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-h-64 overflow-y-auto p-1 pr-2">
-                        <button onclick="triggerFilePicker('audio/*')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
-                            <span>🎵</span> <span class="text-xs font-medium text-slate-200">Muziki (Audio)</span>
-                        </button>
-                        <button onclick="triggerFilePicker('video/*')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
-                            <span>🎬</span> <span class="text-xs font-medium text-slate-200">Video</span>
-                        </button>
-                        <button onclick="triggerFilePicker('image/*')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
-                            <span>🖼️</span> <span class="text-xs font-medium text-slate-200">Picha (Images)</span>
-                        </button>
-                        <button onclick="triggerFilePicker('.vcf,.vcard')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
-                            <span>📇</span> <span class="text-xs font-medium text-slate-200">Contacts (.vcf)</span>
-                        </button>
-                        <button onclick="triggerFilePicker('.html,.htm')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
-                            <span>🌐</span> <span class="text-xs font-medium text-slate-200">Fichiers HTML</span>
-                        </button>
-                        <button onclick="triggerFilePicker('.pdf,.doc,.docx,.txt,.xls,.xlsx')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
-                            <span>📄</span> <span class="text-xs font-medium text-slate-200">Nyaraka (Docs)</span>
-                        </button>
-                        <button onclick="triggerFilePicker('.json,.sql,.db')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
-                            <span>🗄️</span> <span class="text-xs font-medium text-slate-200">Databases / JSON</span>
-                        </button>
-                        <button onclick="triggerFilePicker('.apk')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
-                            <span>📦</span> <span class="text-xs font-medium text-slate-200">Programu (APKs)</span>
-                        </button>
-                        <button onclick="triggerFilePicker('*/*')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
-                            <span>📁</span> <span class="text-xs font-medium text-slate-200">Mafaili Yote</span>
-                        </button>
-                    </div>
+               <div class="bg-cardBg border border-slate-800/80 p-4 sm:p-6 rounded-2xl shadow-xl space-y-4">
+    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300">Chagua Aina ya Data ya Kuhamisha:</h3>
+    
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-h-64 overflow-y-auto p-1 pr-2">
+        <button type="button" onclick="triggerFilePicker('audio/*')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
+            <span>🎵</span> <span class="text-xs font-medium text-slate-200">Muziki (Audio)</span>
+        </button>
+        <button type="button" onclick="triggerFilePicker('video/*')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
+            <span>🎬</span> <span class="text-xs font-medium text-slate-200">Video</span>
+        </button>
+        <button type="button" onclick="triggerFilePicker('image/*')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
+            <span>🖼️</span> <span class="text-xs font-medium text-slate-200">Picha (Images)</span>
+        </button>
+        <button type="button" onclick="triggerFilePicker('.vcf,text/vcard')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
+            <span>📇</span> <span class="text-xs font-medium text-slate-200">Contacts (.vcf)</span>
+        </button>
+        <button type="button" onclick="triggerFilePicker('.html,.htm,text/html')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
+            <span>🌐</span> <span class="text-xs font-medium text-slate-200">Fichiers HTML</span>
+        </button>
+        <button type="button" onclick="triggerFilePicker('.pdf,.doc,.docx,.txt,.xls,.xlsx,application/pdf')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
+            <span>📄</span> <span class="text-xs font-medium text-slate-200">Nyaraka (Docs)</span>
+        </button>
+        <button type="button" onclick="triggerFilePicker('.json,.sql,.db,application/json')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
+            <span>🗄️</span> <span class="text-xs font-medium text-slate-200">Databases / JSON</span>
+        </button>
+        <button type="button" onclick="triggerFilePicker('.apk,application/vnd.android.package-archive')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
+            <span>📦</span> <span class="text-xs font-medium text-slate-200">Programu (APKs)</span>
+        </button>
+        <button type="button" onclick="triggerFilePicker('*/*')" class="flex items-center space-x-2 bg-slate-950 p-3 rounded-xl border border-slate-900 hover:border-red-500/50 cursor-pointer transition text-left">
+            <span>📁</span> <span class="text-xs font-medium text-slate-200">Mafaili Yote</span>
+        </button>
+    </div>
+</div>
+
+<!-- N'oubliez pas d'ajouter l'input caché correspondant dans votre HTML -->
+<input type="file" id="dynamicFileInput" style="display: none;" multiple onchange="handleSelectedFiles(event)">
+
 
                     <input type="file" id="dynamicFileInput" multiple class="hidden" onchange="handleSelectedFiles(event)">
 
@@ -1298,4 +1303,4 @@ window.addEventListener('DOMContentLoaded', updateOnlineStatus);
 
     </script>
 </body>
-  </html>
+</html>
