@@ -1,5 +1,5 @@
 name: byao_native_app
-description: Une application native haute performance pour l'écosystème BYAO.
+description: Una application native haute performance pour l'écosystème BYAO.
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -8,8 +8,7 @@ environment:
 
 dependencies:
   flutter:
-  sdk: flutter
-  # Maktaba rasmi ya kuweka matangazo ya AdMob
+    sdk: flutter
   google_mobile_ads: ^4.0.0
 
 dev_dependencies:
